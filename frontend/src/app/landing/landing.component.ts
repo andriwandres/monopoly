@@ -1,15 +1,15 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { RoomService } from '../../shared/room.service';
+import { RoomService } from '../shared/room.service';
 
 @Component({
-  selector: 'app-create-room',
+  selector: 'app-landing',
   standalone: true,
   imports: [ReactiveFormsModule],
-  templateUrl: './create-room.component.html',
-  styleUrl: './create-room.component.css'
+  templateUrl: './landing.component.html',
+  styleUrl: './landing.component.css'
 })
-export class CreateRoomComponent {
+export class LandingComponent {
   private readonly roomService = inject(RoomService);
 
   readonly form = new FormGroup({

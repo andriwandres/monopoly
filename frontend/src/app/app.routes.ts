@@ -1,11 +1,10 @@
 import { Routes } from '@angular/router';
-import { CreateRoomComponent } from './rooms/create-room/create-room.component';
 
 export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: CreateRoomComponent
+    loadComponent: () => import('./landing/landing.component').then(c => c.LandingComponent)
   },
   {
     path: 'room/:roomId',
