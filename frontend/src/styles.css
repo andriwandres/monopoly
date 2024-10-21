@@ -1,3 +1,7 @@
+:root {
+  --color-white: #fefefe;
+  --color-purple: #29203f;
+}
 
 html, body {
   margin: 0;
@@ -7,4 +11,8 @@ html, body {
   justify-content: center;
   height: 100vh;
   width: 100%;
+}
+
+* {
+  box-sizing: border-box;
 }

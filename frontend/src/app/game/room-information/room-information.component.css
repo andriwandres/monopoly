@@ -1,0 +1,20 @@
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  border-radius: 10px;
+  background-color: var(--color-purple);
+  color: var(--color-white);
+  padding: 0 10px 10px 10px;
+}
+
+.card-title {
+  margin-top: 0;
+}
+
+.share-link {
+  padding: 10px;
+  border: 1px solid grey;
+  border-radius: 3px;
+  background-color: lightgrey;
+  width: 300px;
+  cursor: pointer;
+}

@@ -10,11 +10,11 @@ export class RoomService {
   createRoom(): void {
     const roomIdentifier = this.generateRoomIdentifier();
 
-    this.router.navigate([`/${roomIdentifier}`]);
+    this.router.navigate(['room', `${roomIdentifier}`]);
   }
 
   private generateRoomIdentifier(): string {
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+    const characters = 'abcdefghijklmnopqrstuvwxyz1234567890';
 
     let identifier = '';
 

@@ -8,7 +8,7 @@ export const routes: Routes = [
     component: CreateRoomComponent
   },
   {
-    path: ':roomId',
-    loadComponent: () => import('./board/board.component').then(c => c.BoardComponent)
+    path: 'room/:roomId',
+    loadComponent: () => import('./game/game.component').then(c => c.GameComponent)
   },
 ];
