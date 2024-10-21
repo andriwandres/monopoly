@@ -7,8 +7,11 @@
 
 .sidebar, .board {
   height: 100%;
-  border-left: 1px solid black;
   padding: 10px;
+}
+
+.sidebar:not(:first-of-type), .board {
+  border-left: 1px solid white;
 }
 
 .board {

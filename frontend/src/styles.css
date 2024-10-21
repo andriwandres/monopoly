@@ -1,6 +1,7 @@
 :root {
   --color-white: #fefefe;
   --color-purple: #29203f;
+  --color-purple-dark: #130f1d;
 }
 
 html, body {
@@ -11,6 +12,8 @@ html, body {
   justify-content: center;
   height: 100vh;
   width: 100%;
+  background-color: var(--color-purple-dark);
+  color: var(--color-white);
 }
 
 * {
