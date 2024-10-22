@@ -1,4 +1,4 @@
-package ch.pureguys.monopoly.domain;
+package ch.pureguys.monopoly.domain.entities;
 
 import java.time.LocalDateTime;
 
@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,33 +23,29 @@ import lombok.Setter;
 @Setter
 @Builder
 @Entity
-@Table( name = "GameTransactions" )
-public class GameTransaction
+@Table( name = "GameCards", uniqueConstraints = {
+		@UniqueConstraint( columnNames = { "game_id", "card_id" } )
+} )
+public class GameCard
 {
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
-	private Long transactionId;
+	private Long gameCardId;
 
 	@ManyToOne
 	@JoinColumn( name = "game_id", nullable = false )
 	private Game game;
 
 	@ManyToOne
-	@JoinColumn( name = "from_player_id" )
-	private GamePlayer fromPlayer;
+	@JoinColumn( name = "card_id", nullable = false )
+	private Card card;
 
 	@ManyToOne
-	@JoinColumn( name = "to_player_id" )
-	private GamePlayer toPlayer;
-
-	@Column( nullable = false )
-	private Integer amount;
-
-	@Column( name = "transaction_type", nullable = false, length = 50 )
-	private String transactionType;
+	@JoinColumn( name = "player_id", nullable = false )
+	private GamePlayer drawnBy;
 
 	@Column( name = "created_at", nullable = false )
 	private LocalDateTime createdAt = LocalDateTime.now();
-
 }
+

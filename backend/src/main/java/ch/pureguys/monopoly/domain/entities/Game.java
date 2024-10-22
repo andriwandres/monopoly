@@ -1,8 +1,9 @@
-package ch.pureguys.monopoly.domain;
+package ch.pureguys.monopoly.domain.entities;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+import ch.pureguys.monopoly.domain.GameStatus;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

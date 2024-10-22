@@ -1,4 +1,4 @@
-package ch.pureguys.monopoly.domain;
+package ch.pureguys.monopoly.domain.entities;
 
 import java.time.LocalDateTime;
 import java.util.List;
