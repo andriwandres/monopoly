@@ -51,7 +51,7 @@ public class Property
 	private String name;
 
 	@Enumerated( EnumType.STRING )
-	@Column( name = "property_name", nullable = false, length = 20 )
+	@Column( name = "property_type", nullable = false, length = 20 )
 	private FieldType type;
 
 	@Column( name = "property_color_group", length = 20 )
