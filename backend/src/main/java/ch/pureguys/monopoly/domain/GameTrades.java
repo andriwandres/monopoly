@@ -8,9 +8,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -23,29 +23,39 @@ import lombok.Setter;
 @Setter
 @Builder
 @Entity
-@Table( name = "GameCards", uniqueConstraints = {
-		@UniqueConstraint( columnNames = { "game_id", "card_id" } )
-} )
-public class GameCard
+@Table( name = "GameTrades" )
+public class GameTrades
 {
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
-	private Long gameCardId;
+	private Long tradeId;
 
 	@ManyToOne
 	@JoinColumn( name = "game_id", nullable = false )
 	private Game game;
 
 	@ManyToOne
-	@JoinColumn( name = "card_id", nullable = false )
-	private Card card;
+	@JoinColumn( name = "initiator_id", nullable = false )
+	private GamePlayer initiator;
 
 	@ManyToOne
-	@JoinColumn( name = "player_id", nullable = false )
-	private GamePlayer drawnBy;
+	@JoinColumn( name = "recipient_id", nullable = false )
+	private GamePlayer recipient;
+
+	@Lob
+	@Column( name = "initiator_offer", nullable = false )
+	private String initiatorOffer; // JSON string
+
+	@Lob
+	@Column( name = "recipient_offer", nullable = false )
+	private String recipientOffer; // JSON string
+
+	@Column( nullable = false, length = 20 )
+	private String status; // 'pending', 'accepted', 'declined'
 
 	@Column( name = "created_at", nullable = false )
 	private LocalDateTime createdAt = LocalDateTime.now();
+
 }
 

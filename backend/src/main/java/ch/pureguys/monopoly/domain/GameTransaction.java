@@ -1,5 +1,7 @@
 package ch.pureguys.monopoly.domain;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,7 +10,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,35 +22,33 @@ import lombok.Setter;
 @Setter
 @Builder
 @Entity
-@Table( name = "GameProperties", uniqueConstraints = {
-		@UniqueConstraint( columnNames = { "game_id", "property_id" } )
-} )
-public class GameProperty
+@Table( name = "GameTransactions" )
+public class GameTransaction
 {
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
-	private Long gamePropertyId;
+	private Long transactionId;
 
 	@ManyToOne
 	@JoinColumn( name = "game_id", nullable = false )
 	private Game game;
 
 	@ManyToOne
-	@JoinColumn( name = "property_id", nullable = false )
-	private Property property;
+	@JoinColumn( name = "from_player_id" )
+	private GamePlayer fromPlayer;
 
 	@ManyToOne
-	@JoinColumn( name = "owner_id" )
-	private GamePlayer owner;
+	@JoinColumn( name = "to_player_id" )
+	private GamePlayer toPlayer;
 
-	@Column( name = "houses_built", nullable = false )
-	private Integer housesBuilt = 0;
+	@Column( nullable = false )
+	private Integer amount;
 
-	@Column( name = "has_hotel", nullable = false )
-	private Boolean hasHotel = false;
+	@Column( name = "transaction_type", nullable = false, length = 50 )
+	private String transactionType;
 
-	@Column( name = "is_mortgaged", nullable = false )
-	private Boolean isMortgaged = false;
+	@Column( name = "created_at", nullable = false )
+	private LocalDateTime createdAt = LocalDateTime.now();
 
 }
