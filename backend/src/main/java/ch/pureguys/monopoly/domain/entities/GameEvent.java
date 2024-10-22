@@ -2,8 +2,11 @@ package ch.pureguys.monopoly.domain.entities;
 
 import java.time.LocalDateTime;
 
+import ch.pureguys.monopoly.domain.EventType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -11,6 +14,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jdk.jfr.Event;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,6 +33,7 @@ public class GameEvent
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
+	@Column( name = "event_id" )
 	private Long eventId;
 
 	@ManyToOne
@@ -39,17 +44,18 @@ public class GameEvent
 	@JoinColumn( name = "player_id", nullable = false )
 	private GamePlayer player;
 
-	@Column( name = "event_type", length = 50, nullable = false )
-	private String eventType; // Refactor to ENUM
+	@Enumerated( EnumType.STRING)
+	@Column( name = "event_type", nullable = false )
+	private EventType eventType; // Refactor to ENUM
 
 	@Lob
-	@Column( name = "details" )
+	@Column( name = "event_details" )
 	private String details; // Use JSON to store event details
 
-	@Column( name = "value" )
-	private Integer value; //current money, property value, houses, pardon card, etc.
+	@Column( name = "event_player_value" )
+	private Integer playerValue; //current money, property value, houses, pardon card, etc.
 
-	@Column( name = "created_at", nullable = false )
+	@Column( name = "event_created_at", nullable = false )
 	private LocalDateTime createdAt = LocalDateTime.now();
 
 	@Column( name = "event_sequence", nullable = false )

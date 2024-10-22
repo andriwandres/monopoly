@@ -29,6 +29,7 @@ public class GameProperty
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
+	@Column( name = "game_property_id")
 	private Long gamePropertyId;
 
 	@ManyToOne
@@ -43,13 +44,13 @@ public class GameProperty
 	@JoinColumn( name = "owner_id" )
 	private GamePlayer owner;
 
-	@Column( name = "houses_built", nullable = false )
+	@Column( name = "game_property_houses_built", nullable = false )
 	private Integer housesBuilt = 0;
 
-	@Column( name = "has_hotel", nullable = false )
+	@Column( name = "game_property_has_hotel", nullable = false )
 	private Boolean hasHotel = false;
 
-	@Column( name = "is_mortgaged", nullable = false )
+	@Column( name = "game_property_is_mortgaged", nullable = false )
 	private Boolean isMortgaged = false;
 
 }

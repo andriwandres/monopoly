@@ -28,6 +28,7 @@ public class GameTransaction
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
+	@Column( name = "transaction_id" )
 	private Long transactionId;
 
 	@ManyToOne
@@ -35,20 +36,20 @@ public class GameTransaction
 	private Game game;
 
 	@ManyToOne
-	@JoinColumn( name = "from_player_id" )
+	@JoinColumn( name = "transaction_from_player_id" )
 	private GamePlayer fromPlayer;
 
 	@ManyToOne
-	@JoinColumn( name = "to_player_id" )
+	@JoinColumn( name = "transaction_to_player_id" )
 	private GamePlayer toPlayer;
 
-	@Column( nullable = false )
+	@Column( name = "transaction_amount", nullable = false )
 	private Integer amount;
 
 	@Column( name = "transaction_type", nullable = false, length = 50 )
 	private String transactionType;
 
-	@Column( name = "created_at", nullable = false )
+	@Column( name = "transaction_created_at", nullable = false )
 	private LocalDateTime createdAt = LocalDateTime.now();
 
 }

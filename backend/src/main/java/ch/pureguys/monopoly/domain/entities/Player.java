@@ -28,21 +28,22 @@ public class Player
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
+	@Column( name = "player_id" )
 	private Long playerId;
 
-	@Column( unique = true, nullable = false, length = 50 )
+	@Column( name = "player_username", unique = true, nullable = false, length = 50 )
 	private String username;
 
-	@Column( unique = true, nullable = false, length = 100 )
+	@Column( name = "player_email", unique = true, nullable = false, length = 100 )
 	private String email;
 
-	@Column( nullable = false, length = 255 )
+	@Column( name= "player_password_hash", nullable = false, length = 255 )
 	private String passwordHash;
 
-	@Column( length = 255 )
+	@Column( name= "player_avatar", length = 255 )
 	private String avatar;
 
-	@Column( name = "created_at", nullable = false )
+	@Column( name = "player_ created_at", nullable = false )
 	private LocalDateTime createdAt = LocalDateTime.now();
 
 	// Relationships
