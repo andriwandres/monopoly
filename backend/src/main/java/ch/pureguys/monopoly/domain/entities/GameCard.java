@@ -31,6 +31,7 @@ public class GameCard
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
+	@Column( name = "game_card_id" )
 	private Long gameCardId;
 
 	@ManyToOne
@@ -45,7 +46,7 @@ public class GameCard
 	@JoinColumn( name = "player_id", nullable = false )
 	private GamePlayer drawnBy;
 
-	@Column( name = "created_at", nullable = false )
+	@Column( name = "game_card_created_at", nullable = false )
 	private LocalDateTime createdAt = LocalDateTime.now();
 }
 

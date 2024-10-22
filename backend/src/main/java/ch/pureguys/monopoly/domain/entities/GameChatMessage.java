@@ -27,7 +27,7 @@ public class GameChatMessage
 {
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
-	@Column( name = "game_chat_message_id" )
+	@Column( name = "chat_message_id" )
 	private Long gameChatMessageId;
 
 	@ManyToOne
@@ -38,10 +38,10 @@ public class GameChatMessage
 	@JoinColumn( name = "player_id", nullable = false )
 	private GamePlayer from;
 
-	@Column( name = "text", nullable = false )
+	@Column( name = "chat_message_text", nullable = false )
 	private String text;
 
-	@Column( name = "created_at", nullable = false )
+	@Column( name = "chat_message_created_at", nullable = false )
 	private LocalDateTime createdAt = LocalDateTime.now();
 }
 

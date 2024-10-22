@@ -27,12 +27,13 @@ public class Board
 {
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
+	@Column( name = "board_id" )
 	private Long boardId;
 
-	@Column( nullable = false, length = 100 )
+	@Column( name="board_name", nullable = false, length = 100 )
 	private String name;
 
-	@Column( nullable = false, length = 100 )
+	@Column( name="board_description", nullable = false, length = 100 )
 	private String description;
 
 	@OneToMany( mappedBy = "board", cascade = CascadeType.ALL )

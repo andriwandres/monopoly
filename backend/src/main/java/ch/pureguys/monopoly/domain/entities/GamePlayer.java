@@ -26,13 +26,14 @@ import lombok.Setter;
 @Entity
 @Table( name = "GamePlayers", uniqueConstraints = {
 		@UniqueConstraint( columnNames = { "game_id", "player_id" } ),
-		@UniqueConstraint( columnNames = { "game_id", "player_name" } )
+		@UniqueConstraint( columnNames = { "game_id", "name" } )
 } )
 public class GamePlayer
 {
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
+	@Column( name = "game_player_id" )
 	private Long gamePlayerId;
 
 	@ManyToOne
@@ -43,28 +44,35 @@ public class GamePlayer
 	@JoinColumn( name = "player_id" )
 	private Player player;
 
-	@Column( nullable = false )
+	@Column( name = "game_player_name", nullable = false )
 	private String name;
 
-	@Column( nullable = false )
+	@Builder.Default
+	@Column( name = "game_player_money", nullable = false )
 	private Integer money = 1500;
 
-	@Column( nullable = false )
+	@Builder.Default
+	@Column( name = "game_player_position", nullable = false )
 	private Integer position = 0;
 
-	@Column( name = "in_jail", nullable = false )
+	@Builder.Default
+	@Column( name = "game_player_in_jail", nullable = false )
 	private Boolean inJail = false;
 
-	@Column( name = "jail_turns", nullable = false )
+	@Builder.Default
+	@Column( name = "game_player_jail_turns", nullable = false )
 	private Integer jailTurns = 0;
 
-	@Column( name = "turn_order", nullable = false )
-	private Integer turnOrder;
+	@Builder.Default
+	@Column( name = "game_player_turn_order", nullable = false )
+	private Integer turnOrder = 0;
 
-	@Column( name = "number_of_pardon_cards", nullable = false )
+	@Builder.Default
+	@Column( name = "game_player_number_of_pardon_cards", nullable = false )
 	private Integer numberOfPardonCards = 0;
 
 
+	//Relations
 	@OneToMany( mappedBy = "currentTurnPlayer" )
 	private List<Game> games;
 

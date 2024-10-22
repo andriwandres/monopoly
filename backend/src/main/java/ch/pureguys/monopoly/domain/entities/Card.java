@@ -6,6 +6,8 @@ import ch.pureguys.monopoly.domain.CardType;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -30,16 +32,18 @@ public class Card
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
+	@Column( name = "card_id" )
 	private Long cardId;
 
-	@Column( nullable = false, length = 20 )
-	private CardType type; // 'chance' or 'community_chest'
+	@Enumerated( EnumType.STRING)
+	@Column( name="card_type", nullable = false, length = 20 )
+	private CardType type;
 
-	@Column( nullable = false )
+	@Column( name="card_description", nullable = false )
 	private String description;
 
 	@Lob
-	@Column( nullable = false )
+	@Column( name="card_effect",  nullable = false )
 	private String effect; // JSON string representing the effect
 
 	@OneToMany( mappedBy = "card", cascade = CascadeType.ALL )

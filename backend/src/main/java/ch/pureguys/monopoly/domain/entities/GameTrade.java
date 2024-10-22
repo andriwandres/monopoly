@@ -29,6 +29,7 @@ public class GameTrade
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
+	@Column( name = "trade_id" )
 	private Long tradeId;
 
 	@ManyToOne
@@ -36,25 +37,25 @@ public class GameTrade
 	private Game game;
 
 	@ManyToOne
-	@JoinColumn( name = "initiator_id", nullable = false )
+	@JoinColumn( name = "trade_initiator_id", nullable = false )
 	private GamePlayer initiator;
 
 	@ManyToOne
-	@JoinColumn( name = "recipient_id", nullable = false )
+	@JoinColumn( name = "trade_recipient_id", nullable = false )
 	private GamePlayer recipient;
 
 	@Lob
-	@Column( name = "initiator_offer", nullable = false )
+	@Column( name = "trade_initiator_offer", nullable = false )
 	private String initiatorOffer; // JSON string
 
 	@Lob
-	@Column( name = "recipient_offer", nullable = false )
+	@Column( name = "trade_recipient_offer", nullable = false )
 	private String recipientOffer; // JSON string
 
-	@Column( nullable = false, length = 20 )
+	@Column( name = "trade_status", nullable = false, length = 20 )
 	private String status; // 'pending', 'accepted', 'declined'
 
-	@Column( name = "created_at", nullable = false )
+	@Column( name = "trade_created_at", nullable = false )
 	private LocalDateTime createdAt = LocalDateTime.now();
 
 }
