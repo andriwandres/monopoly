@@ -1,4 +1,2 @@
-<form [formGroup]="form" class="form">
-  <input class="nickname" type="text" placeholder="Nickname">
-  <button type="button" class="submit" (click)="createRoom()">Create Room</button>
-</form>
+<input class="nickname" type="text" placeholder="Nickname" [formControl]="nickname">
+<button type="button" class="submit" (click)="createRoom()">Create Room</button>

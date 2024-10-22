@@ -24,7 +24,7 @@ import lombok.Setter;
 @Builder
 @Entity
 @Table( name = "GameTrades" )
-public class GameTrades
+public class GameTrade
 {
 
 	@Id

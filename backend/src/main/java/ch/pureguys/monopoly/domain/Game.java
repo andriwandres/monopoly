@@ -37,7 +37,7 @@ public class Game
 	private LocalDateTime createdAt = LocalDateTime.now();
 
 	@Column( nullable = false, length = 20 )
-	private GameStatus status; // 'waiting', 'in_progress', 'completed'
+	private GameStatus status;
 
 	@ManyToOne
 	@JoinColumn( name = "current_turn_player_id" )
@@ -56,7 +56,7 @@ public class Game
 	private List<GameTransaction> gameTransactions;
 
 	@OneToMany( mappedBy = "game", cascade = CascadeType.ALL )
-	private List<GameTrades> gameTrades;
+	private List<GameTrade> gameTrades;
 
 	@OneToMany( mappedBy = "game", cascade = CascadeType.ALL )
 	private List<GameEvent> gameEvents;

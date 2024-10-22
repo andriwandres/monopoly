@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { RoomService } from '../shared/room.service';
 
 @Component({
@@ -7,16 +7,14 @@ import { RoomService } from '../shared/room.service';
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './landing.component.html',
-  styleUrl: './landing.component.css'
+  styleUrl: './landing.component.css',
 })
 export class LandingComponent {
   private readonly roomService = inject(RoomService);
 
-  readonly form = new FormGroup({
-    nickname: new FormControl('')
-  });
+  readonly nickname = new FormControl('')
 
   createRoom(): void {
-    this.roomService.createRoom();
+    this.roomService.createRoom(this.nickname.value!);
   }
 }

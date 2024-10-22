@@ -7,8 +7,10 @@ const ROOM_IDENTIFIER_LENGTH = 10;
 export class RoomService {
   private readonly router = inject(Router);
 
-  createRoom(): void {
+  createRoom(nickname: string): void {
     const roomIdentifier = this.generateRoomIdentifier();
+
+    // TODO generate room & join as admin player
 
     this.router.navigate(['room', `${roomIdentifier}`]);
   }

@@ -78,10 +78,10 @@ public class GamePlayer
 	private List<GameTransaction> transactionsTo;
 
 	@OneToMany( mappedBy = "initiator" )
-	private List<GameTrades> initiatedGameTrades;
+	private List<GameTrade> initiatedGameTrades;
 
 	@OneToMany( mappedBy = "recipient" )
-	private List<GameTrades> receivedGameTrades;
+	private List<GameTrade> receivedGameTrades;
 
 	@OneToMany( mappedBy = "player" )
 	private List<GameEvent> gameEvents;
