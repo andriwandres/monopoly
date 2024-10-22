@@ -29,9 +29,7 @@ import lombok.Setter;
 @Setter
 @Builder
 @Entity
-@Table( name = "Games", uniqueConstraints = {
-		@UniqueConstraint( columnNames = { "public_room_id" } )
-} )
+@Table( name = "Games" )
 public class Game
 {
 
@@ -44,7 +42,7 @@ public class Game
 	@JoinColumn( name = "board_id", nullable = false )
 	private Board board;
 
-	@Column( name = "game_public_room_id", nullable = false )
+	@Column( name = "game_public_room_id", nullable = false, unique = true )
 	private String publicRoomId;
 
 	@Enumerated( EnumType.STRING)

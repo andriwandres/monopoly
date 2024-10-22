@@ -29,7 +29,7 @@ import lombok.Setter;
 @Builder
 @Entity
 @Table( name = "Properties", uniqueConstraints = {
-		@UniqueConstraint( columnNames = { "property_id", "board_id", "position_Index" } )
+		@UniqueConstraint( columnNames = { "property_id", "board_id", "property_position_index" } )
 } )
 public class Property
 {
