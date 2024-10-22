@@ -1,0 +1,25 @@
+package ch.pureguys.monopoly.domain;
+
+public enum EventType {
+    DiceRolled,
+    TurnEnded,
+    PropertyBought,
+    PropertyAuctionStarted,
+    PropertyAuctioned,
+    PropertySold,
+    PropertyMortgaged,
+    TradeInitiated,
+    TradeAccepted,
+    TradeRejected,
+    HouseBought,
+    HouseSold,
+    PaidOutOfJail,
+    RolledOutOfJail,
+    UsedPardonCard,
+    WentToJail,
+    PaidRent,
+    PaidMoney,
+    ReceivedMoney,
+    WentTo,
+    Bankrupted,
+}
