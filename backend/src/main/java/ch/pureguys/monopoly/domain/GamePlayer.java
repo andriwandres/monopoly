@@ -86,5 +86,8 @@ public class GamePlayer
 	@OneToMany( mappedBy = "player" )
 	private List<GameEvent> gameEvents;
 
+	@OneToMany( mappedBy = "drawnBy" )
+	private List<GameCard> gameCards;
+
 }
 
