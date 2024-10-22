@@ -32,7 +32,7 @@ public class Card
 	private Long cardId;
 
 	@Column( nullable = false, length = 20 )
-	private String type; // 'chance' or 'community_chest'
+	private CardType type; // 'chance' or 'community_chest'
 
 	@Column( nullable = false )
 	private String description;
