@@ -1,0 +1,13 @@
+
+@if (dice) {
+  <div class="dice">
+    @for (dieFace of dice; track $index) {
+      <div class="die"> {{ dieFace }} </div>
+    }
+  </div>
+}
+@else {
+  <button class="throw-dice" (click)="throwDice()">
+    Throw Dice
+  </button>
+}

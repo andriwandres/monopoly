@@ -1,5 +1,34 @@
-<div class="grid">
-  @for (tile of board; track tile.name) {
-    <app-property-tile [property]="tile"/>
-  }
+<div class="grid-layout">
+  <!-- Top row -->
+  <div class="start">start</div>
+  <div class="top">
+    @for (tile of board.topTiles; track $index) {
+      <app-property-tile [property]="tile"/>
+    }
+  </div>
+  <div class="prison">prison</div>
+
+  <!-- Center row -->
+  <div class="left">
+    @for (tile of board.leftTiles; track $index) {
+      <app-property-tile [property]="tile"/>
+    }
+  </div>
+  <div class="center">
+    <app-dice class="dice"/>
+  </div>
+  <div class="right">
+    @for (tile of board.rightTiles; track $index) {
+      <app-property-tile [property]="tile"/>
+    }
+  </div>
+
+  <!-- Bottom row -->
+  <div class="go-to-prison">go to prison</div>
+  <div class="bottom">
+    @for (tile of board.bottomTiles; track $index) {
+      <app-property-tile [property]="tile"/>
+    }
+  </div>
+  <div class="vacation">vacation</div>
 </div>

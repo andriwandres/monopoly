@@ -1,0 +1,31 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.dice {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.die {
+  width: 50px;
+  height: 50px;
+  background-color: var(--color-white);
+  color: var(--color-black);
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.throw-dice {
+  padding: 5px;
+  background-color: rgb(40, 40, 185);
+  color: #efefef;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
