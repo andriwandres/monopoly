@@ -118,3 +118,8 @@ VALUES
 -- Luxury Tax
 INSERT INTO properties (property_id, property_position_index, property_name, property_type, board_id)
 VALUES (39, 38, 'Luxury Tax', 'TAX', 1);
+
+
+UPDATE properties
+SET property_rent_all_properties = property_rent_base * 2
+WHERE property_type = 'PROPERTY';
