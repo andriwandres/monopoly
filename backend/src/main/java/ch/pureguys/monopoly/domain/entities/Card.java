@@ -1,13 +1,15 @@
-package ch.pureguys.monopoly.domain;
+package ch.pureguys.monopoly.domain.entities;
 
 import java.util.List;
 
+import ch.pureguys.monopoly.domain.CardType;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -22,19 +24,24 @@ import lombok.Setter;
 @Setter
 @Builder
 @Entity
-@Table( name = "Boards" )
-public class Board
+@Table( name = "Cards" )
+public class Card
 {
+
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
-	private Long boardId;
+	private Long cardId;
 
-	@Column( nullable = false, length = 100 )
-	private String name;
+	@Column( nullable = false, length = 20 )
+	private CardType type; // 'chance' or 'community_chest'
 
-	@Column( nullable = false, length = 100 )
+	@Column( nullable = false )
 	private String description;
 
-	@OneToMany( mappedBy = "board", cascade = CascadeType.ALL )
-	private List<Property> properties;
+	@Lob
+	@Column( nullable = false )
+	private String effect; // JSON string representing the effect
+
+	@OneToMany( mappedBy = "card", cascade = CascadeType.ALL )
+	private List<GameCard> gameCards;
 }

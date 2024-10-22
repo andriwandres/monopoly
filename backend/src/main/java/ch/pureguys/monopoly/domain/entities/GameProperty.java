@@ -1,6 +1,4 @@
-package ch.pureguys.monopoly.domain;
-
-import java.time.LocalDateTime;
+package ch.pureguys.monopoly.domain.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,29 +21,35 @@ import lombok.Setter;
 @Setter
 @Builder
 @Entity
-@Table( name = "GameCards", uniqueConstraints = {
-		@UniqueConstraint( columnNames = { "game_id", "card_id" } )
+@Table( name = "GameProperties", uniqueConstraints = {
+		@UniqueConstraint( columnNames = { "game_id", "property_id" } )
 } )
-public class GameCard
+public class GameProperty
 {
 
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
-	private Long gameCardId;
+	private Long gamePropertyId;
 
 	@ManyToOne
 	@JoinColumn( name = "game_id", nullable = false )
 	private Game game;
 
 	@ManyToOne
-	@JoinColumn( name = "card_id", nullable = false )
-	private Card card;
+	@JoinColumn( name = "property_id", nullable = false )
+	private Property property;
 
 	@ManyToOne
-	@JoinColumn( name = "player_id", nullable = false )
-	private GamePlayer drawnBy;
+	@JoinColumn( name = "owner_id" )
+	private GamePlayer owner;
 
-	@Column( name = "created_at", nullable = false )
-	private LocalDateTime createdAt = LocalDateTime.now();
+	@Column( name = "houses_built", nullable = false )
+	private Integer housesBuilt = 0;
+
+	@Column( name = "has_hotel", nullable = false )
+	private Boolean hasHotel = false;
+
+	@Column( name = "is_mortgaged", nullable = false )
+	private Boolean isMortgaged = false;
+
 }
-

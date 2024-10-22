@@ -1,4 +1,4 @@
-package ch.pureguys.monopoly.domain;
+package ch.pureguys.monopoly.domain.entities;
 
 import java.time.LocalDateTime;
 
@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -22,26 +23,39 @@ import lombok.Setter;
 @Setter
 @Builder
 @Entity
-@Table( name = "GameChatMessages" )
-public class GameChatMessage
+@Table( name = "GameTrades" )
+public class GameTrade
 {
+
 	@Id
 	@GeneratedValue( strategy = GenerationType.IDENTITY )
-	@Column( name = "game_chat_message_id" )
-	private Long gameChatMessageId;
+	private Long tradeId;
 
 	@ManyToOne
 	@JoinColumn( name = "game_id", nullable = false )
 	private Game game;
 
 	@ManyToOne
-	@JoinColumn( name = "player_id", nullable = false )
-	private GamePlayer from;
+	@JoinColumn( name = "initiator_id", nullable = false )
+	private GamePlayer initiator;
 
-	@Column( name = "text", nullable = false )
-	private String text;
+	@ManyToOne
+	@JoinColumn( name = "recipient_id", nullable = false )
+	private GamePlayer recipient;
+
+	@Lob
+	@Column( name = "initiator_offer", nullable = false )
+	private String initiatorOffer; // JSON string
+
+	@Lob
+	@Column( name = "recipient_offer", nullable = false )
+	private String recipientOffer; // JSON string
+
+	@Column( nullable = false, length = 20 )
+	private String status; // 'pending', 'accepted', 'declined'
 
 	@Column( name = "created_at", nullable = false )
 	private LocalDateTime createdAt = LocalDateTime.now();
+
 }
 
