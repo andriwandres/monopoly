@@ -1,0 +1,76 @@
+:host {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.grid {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.grid-layout {
+  display: grid;
+  gap: 10px;
+  height: 100%;
+  width: 100%;
+  grid-template-areas:
+    "start top prison"
+    "left center right"
+    "gotoprison bottom vacation";
+  grid-template-rows: 100px 1fr 100px;
+  grid-template-columns: 100px 1fr 100px;
+}
+
+.grid-layout > * {
+  display: grid;
+  place-items: center;
+  border: 1px solid white;
+}
+
+.top, .right, .bottom, .left {
+  gap: 5px;
+}
+
+.start {
+  grid-area: "start";
+}
+
+.prison {
+  grid-area: "prison";
+}
+
+.vacation {
+  grid-area: "vacation";
+}
+
+.go-to-prison {
+  grid-area: "gotoprison";
+}
+
+.top {
+  grid-area: "top";
+}
+
+.right {
+  grid-area: "right";
+}
+
+.bottom {
+  grid-area: "bottom";
+}
+
+.left {
+  grid-area: "left";
+}
+
+.top, .bottom {
+  grid-auto-flow: column;
+}
+
+.left, .right {
+  grid-auto-flow: row;
+}
+
+
