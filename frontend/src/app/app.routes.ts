@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { gameGuard } from './game/game.guard';
 
 export const routes: Routes = [
   {
@@ -8,6 +9,7 @@ export const routes: Routes = [
   },
   {
     path: 'room/:roomId',
-    loadComponent: () => import('./game/game.component').then(c => c.GameComponent)
+    loadComponent: () => import('./game/game.component').then(c => c.GameComponent),
+    canActivate: [gameGuard]
   },
 ];

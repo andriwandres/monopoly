@@ -1,0 +1,16 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  background-color: var(--color-purple);
+  color: var(--color-white);
+  border-radius: 3px;
+}
+
+.price {
+  background-color: green;
+  padding: 5px;
+  border-radius: 20px;
+  text-align: center;
+}
