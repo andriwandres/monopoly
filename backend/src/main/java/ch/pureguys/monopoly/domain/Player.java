@@ -46,7 +46,7 @@ public class Player
 	private LocalDateTime createdAt = LocalDateTime.now();
 
 	// Relationships
-	@OneToMany( mappedBy = "gamePlayer" )
+	@OneToMany( mappedBy = "player" )
 	private List<GamePlayer> gamePlayers;
 
 }
