@@ -56,7 +56,7 @@ public class Game
 	private List<GameTransaction> gameTransactions;
 
 	@OneToMany( mappedBy = "game", cascade = CascadeType.ALL )
-	private List<GameTrades> gameTrades;
+	private List<GameTrade> gameTrades;
 
 	@OneToMany( mappedBy = "game", cascade = CascadeType.ALL )
 	private List<GameEvent> gameEvents;
