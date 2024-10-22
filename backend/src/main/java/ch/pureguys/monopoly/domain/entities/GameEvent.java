@@ -55,6 +55,7 @@ public class GameEvent
 	@Column( name = "event_player_value" )
 	private Integer playerValue; //current money, property value, houses, pardon card, etc.
 
+	@Builder.Default
 	@Column( name = "event_created_at", nullable = false )
 	private LocalDateTime createdAt = LocalDateTime.now();
 

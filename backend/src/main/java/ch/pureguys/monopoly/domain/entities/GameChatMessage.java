@@ -41,6 +41,7 @@ public class GameChatMessage
 	@Column( name = "chat_message_text", nullable = false )
 	private String text;
 
+	@Builder.Default
 	@Column( name = "chat_message_created_at", nullable = false )
 	private LocalDateTime createdAt = LocalDateTime.now();
 }

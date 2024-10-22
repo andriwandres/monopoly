@@ -55,6 +55,7 @@ public class GameTrade
 	@Column( name = "trade_status", nullable = false, length = 20 )
 	private String status; // 'pending', 'accepted', 'declined'
 
+	@Builder.Default
 	@Column( name = "trade_created_at", nullable = false )
 	private LocalDateTime createdAt = LocalDateTime.now();
 

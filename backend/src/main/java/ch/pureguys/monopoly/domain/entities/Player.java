@@ -43,6 +43,7 @@ public class Player
 	@Column( name= "player_avatar", length = 255 )
 	private String avatar;
 
+	@Builder.Default
 	@Column( name = "player_ created_at", nullable = false )
 	private LocalDateTime createdAt = LocalDateTime.now();
 

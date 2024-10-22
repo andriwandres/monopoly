@@ -1,4 +1,4 @@
-package ch.pureguys.monopoly.controller;
+package ch.pureguys.monopoly.api.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

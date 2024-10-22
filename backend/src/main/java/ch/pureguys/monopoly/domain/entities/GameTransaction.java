@@ -49,6 +49,7 @@ public class GameTransaction
 	@Column( name = "transaction_type", nullable = false, length = 50 )
 	private String transactionType;
 
+	@Builder.Default
 	@Column( name = "transaction_created_at", nullable = false )
 	private LocalDateTime createdAt = LocalDateTime.now();
 

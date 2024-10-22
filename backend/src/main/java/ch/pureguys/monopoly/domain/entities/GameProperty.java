@@ -44,12 +44,15 @@ public class GameProperty
 	@JoinColumn( name = "owner_id" )
 	private GamePlayer owner;
 
+	@Builder.Default
 	@Column( name = "game_property_houses_built", nullable = false )
 	private Integer housesBuilt = 0;
 
+	@Builder.Default
 	@Column( name = "game_property_has_hotel", nullable = false )
 	private Boolean hasHotel = false;
 
+	@Builder.Default
 	@Column( name = "game_property_is_mortgaged", nullable = false )
 	private Boolean isMortgaged = false;
 

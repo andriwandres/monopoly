@@ -46,6 +46,7 @@ public class GameCard
 	@JoinColumn( name = "player_id", nullable = false )
 	private GamePlayer drawnBy;
 
+	@Builder.Default
 	@Column( name = "game_card_created_at", nullable = false )
 	private LocalDateTime createdAt = LocalDateTime.now();
 }

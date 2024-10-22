@@ -1,4 +1,4 @@
-package ch.pureguys.monopoly.controller;
+package ch.pureguys.monopoly.api.controller;
 
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
