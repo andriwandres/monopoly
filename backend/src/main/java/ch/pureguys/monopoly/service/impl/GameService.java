@@ -44,7 +44,6 @@ public class GameService
 								.build() ).toList();
 
 				List<GameProperty> savedGameProperties = gamePropertyRepository.saveAll( gameProperties );
-				//TBD does the frontend request the full game data or does the backend send it as soon as it is ready?
 
 				List<GamePropertyDto> gamePropertyDtos = savedGameProperties.stream()
 						.map( GamePropertyMapper.INSTANCE::gamePropertyToGamePropertyDto )
@@ -56,7 +55,10 @@ public class GameService
 
 				GameDto gameDto = GameMapper.INSTANCE.gameToGameDto( game, gamePlayerDtos, gamePropertyDtos );
 				log.info( "GameDto: {}", gameDto );
+
 				//Todo notify via websocket (json)
+				//TBD does the frontend request the full game data or does the backend send it as soon as it is ready?
+
 				log.info( "Game properties created" );
 				log.info( "Game properties count: {}", gameProperties.size() );
 			}
