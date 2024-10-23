@@ -1,4 +1,7 @@
-﻿namespace Monopoly.Domain.Transactions;
+﻿using Monopoly.Domain.Games;
+using Monopoly.Domain.Players;
+
+namespace Monopoly.Domain.Transactions;
 
 public sealed class Transaction
 {
@@ -12,4 +15,9 @@ public sealed class Transaction
     public TransactionType Type { get; set; }
     
     public DateTime CreatedAt { get; set; }
+
+    // Navigation Properties
+    public Game Game { get; set; }
+    public Player FromPlayer { get; set; }
+    public Player ToPlayer { get; set; }
 }

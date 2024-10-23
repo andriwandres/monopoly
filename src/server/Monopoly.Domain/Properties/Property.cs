@@ -14,9 +14,12 @@ public sealed class Property
     public int HouseCost { get; set; }
     public int HotelCost { get; set; }
     public int BaseRent { get; set; }
-    public int RentWithOnHouse { get; set; }
+    public int RentWithOneHouse { get; set; }
     public int RentWithTwoHouses { get; set; }
     public int RentWithThreeHouses { get; set; }
     public int RentWithFourHouses { get; set; }
     public int RentWithHotel { get; set; }
+
+    // Navigation Properties
+    public ICollection<PropertyGame> PropertyGames { get; set; } = new HashSet<PropertyGame>();
 }
