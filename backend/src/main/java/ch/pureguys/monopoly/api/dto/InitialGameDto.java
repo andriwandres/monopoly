@@ -3,7 +3,6 @@ package ch.pureguys.monopoly.api.dto;
 import java.time.LocalDateTime;
 
 import ch.pureguys.monopoly.domain.GameStatus;
-import ch.pureguys.monopoly.domain.entities.Board;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

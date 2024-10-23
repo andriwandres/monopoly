@@ -9,7 +9,7 @@ import ch.pureguys.monopoly.domain.entities.Property;
 
 public interface PropertyRepository extends JpaRepository<Property, Long>
 {
-	@Query( "SELECT p FROM Property p WHERE p.board = :boardId" )
-	List<Property> findAllByBoardId ( Long boardId );
+	@Query( "SELECT p FROM Property p WHERE p.board.boardId = :boardId" )
+	List<Property> findAllByBoardId ( long boardId );
 
 }

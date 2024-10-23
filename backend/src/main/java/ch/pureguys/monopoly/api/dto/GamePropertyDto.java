@@ -19,7 +19,7 @@ import lombok.ToString;
 public class GamePropertyDto
 {
 	private Long gamePropertyId;
-	private Integer ownerId;
+	private Long ownerId;
 	private Integer positionIndex;
 	private String name;
 	private FieldType type;
