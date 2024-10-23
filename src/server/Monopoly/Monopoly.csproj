@@ -17,4 +17,8 @@
       </Content>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Monopoly.Infrastructure\Monopoly.Infrastructure.csproj" />
+    </ItemGroup>
+
 </Project>
