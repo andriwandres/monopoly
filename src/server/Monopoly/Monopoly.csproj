@@ -8,7 +8,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.5" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.10">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -23,6 +22,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Monopoly.Infrastructure\Monopoly.Infrastructure.csproj" />
+        <ProjectReference Include="..\Monopoly.Presentation\Monopoly.Presentation.csproj" />
     </ItemGroup>
 
 </Project>

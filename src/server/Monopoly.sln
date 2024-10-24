@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monopoly.Application", "Mon
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8B426948-CCEC-4E14-BC9C-F7E0C9B01722}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Monopoly.Presentation", "Monopoly.Presentation\Monopoly.Presentation.csproj", "{9FBAC511-943E-499A-809B-BE5606A4E5F9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,5 +34,9 @@ Global
 		{960E4A3E-E458-46AB-A91F-39C40E28970A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{960E4A3E-E458-46AB-A91F-39C40E28970A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{960E4A3E-E458-46AB-A91F-39C40E28970A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FBAC511-943E-499A-809B-BE5606A4E5F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FBAC511-943E-499A-809B-BE5606A4E5F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FBAC511-943E-499A-809B-BE5606A4E5F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FBAC511-943E-499A-809B-BE5606A4E5F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
