@@ -1,4 +1,4 @@
-﻿namespace Monopoly.Domain.Dice;
+﻿namespace Monopoly.Domain.Die;
 
 public static class Dice
 {

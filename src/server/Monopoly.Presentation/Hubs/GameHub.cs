@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.SignalR;
-using Monopoly.Domain.Dice;
+using Monopoly.Domain.Die;
 using Monopoly.Presentation.Events.Dice;
 
 namespace Monopoly.Presentation.Hubs;
 
-internal sealed class GameHub : Hub<IGameHub>
+internal sealed class GameHub : Hub<IGameClient>, IGameServer
 {
     public override async Task OnConnectedAsync()
     {

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
+using Monopoly.Presentation.Endpoints;
 using Monopoly.Presentation.Hubs;
 
 namespace Monopoly.Presentation;
@@ -16,6 +17,8 @@ public static class Extensions
     public static IEndpointRouteBuilder UsePresentationEndpoints(this IEndpointRouteBuilder routeBuilder)
     {
         routeBuilder.MapHub<GameHub>("game-hub");
+        routeBuilder.MapGameEndpoints();
+        
         return routeBuilder;
     }
 }
