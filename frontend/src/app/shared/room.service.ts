@@ -3,7 +3,11 @@ import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConnectivityService } from './connectivity.service';
 
-const URL_PREFIX = 'http://localhost:8000/game';
+const URL_PREFIX = 'http://localhost:8080/game';
+
+export interface InitialGameDto {
+  publicRoomId: string;
+}
 
 @Injectable({ providedIn: 'root' })
 export class RoomService {
@@ -12,17 +16,21 @@ export class RoomService {
   private readonly http = inject(HttpClient);
 
   createRoom(nickname: string): void {
-    const payload = { nickname };
-
     this.http
-      .post<string>(`${URL_PREFIX}/start`, payload)
-      .subscribe(roomId => this.joinRoom(roomId, nickname));
+      .post<InitialGameDto>(`${URL_PREFIX}/start`, null)
+      .subscribe(({ publicRoomId}) => this.joinRoom(publicRoomId, nickname));
   }
 
   private joinRoom(roomId: string, nickname: string): void {
-    this.connectivityService.send('/app/joinGame', {
+    this.connectivityService.send('/app/join', {
       roomId,
-      nickname
+      nickName: nickname,
+      hexColor: '#AFFE69' // TODO determine
+    });
+
+    // TODO remove eventually
+    this.connectivityService.on(`/topic/game/${roomId}`, m => {
+      console.log('game state', m);
     });
 
     this.router.navigate(['room', `${roomId}`]);
