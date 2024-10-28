@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Monopoly.Application.Games;
+using Monopoly.Application.Players;
 using Monopoly.Domain.Common;
 using Monopoly.Infrastructure.Common;
 using Monopoly.Infrastructure.Database;
@@ -37,7 +38,9 @@ public static class DependencyInjection
 
     private static IServiceCollection AddRepositories(this IServiceCollection services)
     {
-        return services.AddTransient<IGameRepository, GameRepository>();
+        return services
+            .AddTransient<IGameRepository, GameRepository>()
+            .AddTransient<IPlayerRepository, PlayerRepository>();
     }
 
     private static IServiceCollection AddCommonServices(this IServiceCollection services)

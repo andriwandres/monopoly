@@ -6,7 +6,7 @@ using Monopoly.Presentation.Hubs;
 
 namespace Monopoly.Presentation;
 
-public static class Extensions
+public static class Public
 {
     public static IServiceCollection AddPresentationServices(this IServiceCollection services)
     {

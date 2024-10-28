@@ -1,4 +1,5 @@
-﻿using Monopoly.Application.Games;
+﻿using Microsoft.EntityFrameworkCore;
+using Monopoly.Application.Games;
 using Monopoly.Domain.Common;
 using Monopoly.Domain.Games;
 using Monopoly.Infrastructure.Database;
@@ -16,20 +17,33 @@ internal sealed class GameRepository : IGameRepository
         _dateProvider = dateProvider;
     }
 
+    public async Task<Game> FindByCode(string gameCode)
+    {
+        return await _context.Games.SingleAsync(game => game.Code == gameCode);
+    }
+
     public async Task<Game> Create()
     {
         var game = new Game
         {
+            Code = await GetUniqueGameCode(),
             Status = GameStatus.Pending,
-            CreatedAt = _dateProvider.Now()
+            CreatedAt = _dateProvider.Now(),
         };
 
-        do game.Code = GameCode.Create(new Random());
-        while (_context.Games.Any(g => g.Code == game.Code));
-        
-        _context.Games.Add(game);
+        await _context.Games.AddAsync(game);
         await _context.SaveChangesAsync();
-        
+
         return game;
+    }
+
+    private async Task<string> GetUniqueGameCode()
+    {
+        string gameCode;
+        
+        do gameCode = GameCode.Create(new Random());
+        while (await _context.Games.AnyAsync(g => g.Code == gameCode));
+
+        return gameCode;
     }
 }
