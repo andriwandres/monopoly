@@ -9,6 +9,7 @@ import ch.pureguys.monopoly.api.dto.GameDto;
 import ch.pureguys.monopoly.api.dto.GamePlayerDto;
 import ch.pureguys.monopoly.api.dto.GamePropertyDto;
 import ch.pureguys.monopoly.domain.entities.Game;
+import ch.pureguys.monopoly.domain.entities.GamePlayer;
 import ch.pureguys.monopoly.domain.entities.GameProperty;
 import ch.pureguys.monopoly.domain.entities.Property;
 import ch.pureguys.monopoly.mapper.impl.GameMapper;
@@ -16,6 +17,7 @@ import ch.pureguys.monopoly.mapper.impl.GamePlayerMapper;
 import ch.pureguys.monopoly.mapper.impl.GamePropertyMapper;
 import ch.pureguys.monopoly.repository.impl.GamePlayerRepository;
 import ch.pureguys.monopoly.repository.impl.GamePropertyRepository;
+import ch.pureguys.monopoly.repository.impl.GameRepository;
 import ch.pureguys.monopoly.repository.impl.PropertyRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +30,7 @@ public class GameService
 	private final GamePropertyRepository gamePropertyRepository;
 	private final GamePlayerRepository gamePlayerRepository;
 	private final PropertyRepository propertyRepository;
+	private final GameRepository gameRepository;
 
 	public void prepareGameAsync ( long boardId, Game game )
 	{
@@ -68,5 +71,30 @@ public class GameService
 				throw new RuntimeException( e );
 			}
 		} );
+	}
+
+	public GameDto getCurrentGameDto ( String roomId )
+	{
+		Game game = gameRepository.findByPublicRoomId( roomId );
+
+		if ( game == null )
+		{
+			log.error( "Game not found" );
+			throw new RuntimeException( "Game not found" );
+		}
+
+		List<GamePlayer> gamePlayers = gamePlayerRepository.findAllByGameId( game.getGameId() );
+		List<GameProperty> gameProperties = gamePropertyRepository.findAllByGameId( game.getGameId() );
+
+		List<GamePlayerDto> gamePlayerDtos = gamePlayers.stream()
+				.map( GamePlayerMapper.INSTANCE::gamePlayerToGamePlayerDto )
+				.toList();
+
+		List<GamePropertyDto> gamePropertyDtos = gameProperties.stream()
+				.map( GamePropertyMapper.INSTANCE::gamePropertyToGamePropertyDto )
+				.toList();
+
+		return GameMapper.INSTANCE.gameToGameDto( game, gamePlayerDtos, gamePropertyDtos );
+
 	}
 }

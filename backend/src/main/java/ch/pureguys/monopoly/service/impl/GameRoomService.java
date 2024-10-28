@@ -10,22 +10,22 @@ import org.springframework.stereotype.Service;
 @Service
 public class GameRoomService
 {
-	private final Map<String, Set<String>> gameRooms = new HashMap<>();
+	private final Map<String, Set<Long>> gameRooms = new HashMap<>();
 
-	public void joinRoom ( String roomId, String playerId )
+	public void joinRoom ( String roomId, Long playerId )
 	{
 		gameRooms.computeIfAbsent( roomId, k -> new HashSet<>() ).add( playerId );
 		//add to db
 	}
 
-	public Set<String> getPlayersInRoom ( String roomId )
+	public Set<Long> getPlayersInRoom ( String roomId )
 	{
 		return gameRooms.getOrDefault( roomId, new HashSet<>() );
 	}
 
-	public void leaveRoom ( String roomId, String playerId )
+	public void leaveRoom ( String roomId, Long playerId )
 	{
-		Set<String> players = gameRooms.get( roomId );
+		Set<Long> players = gameRooms.get( roomId );
 		if ( players != null )
 		{
 			players.remove( playerId );

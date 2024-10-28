@@ -21,7 +21,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer
 	@Override
 	public void registerStompEndpoints ( StompEndpointRegistry registry )
 	{
-		registry.addEndpoint( "/game" )
+		registry.addEndpoint( "/monopoly" )
 				.setAllowedOrigins( "http://localhost:4200" ) // Adjust this to your Angular app's URL
 				.withSockJS();
 	}
