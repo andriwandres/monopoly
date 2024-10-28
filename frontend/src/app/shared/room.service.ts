@@ -1,29 +1,30 @@
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { ConnectivityService } from './connectivity.service';
 
-const ROOM_IDENTIFIER_LENGTH = 10;
+const URL_PREFIX = 'http://localhost:8000/game';
 
 @Injectable({ providedIn: 'root' })
 export class RoomService {
   private readonly router = inject(Router);
+  private readonly connectivityService = inject(ConnectivityService);
+  private readonly http = inject(HttpClient);
 
   createRoom(nickname: string): void {
-    const roomIdentifier = this.generateRoomIdentifier();
+    const payload = { nickname };
 
-    // TODO generate room & join as admin player
-
-    this.router.navigate(['room', `${roomIdentifier}`]);
+    this.http
+      .post<string>(`${URL_PREFIX}/start`, payload)
+      .subscribe(roomId => this.joinRoom(roomId, nickname));
   }
 
-  private generateRoomIdentifier(): string {
-    const characters = 'abcdefghijklmnopqrstuvwxyz1234567890';
+  private joinRoom(roomId: string, nickname: string): void {
+    this.connectivityService.send('/app/joinGame', {
+      roomId,
+      nickname
+    });
 
-    let identifier = '';
-
-    for (let index = 0; index < ROOM_IDENTIFIER_LENGTH; index++) {
-      identifier += characters.charAt(Math.floor(Math.random() * characters.length));
-    }
-
-    return identifier;
+    this.router.navigate(['room', `${roomId}`]);
   }
 }
