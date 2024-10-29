@@ -35,13 +35,7 @@ public class GameController
 	public ResponseEntity<InitialGameDto> create ()
 	{
 		//Todo: send board id as parameter
-		Board board = boardRepository.findById( DEFAULT_BOARD_ID ).orElse( null );
-
-		if ( board == null )
-		{
-			log.error( "Board not found" );
-			return ResponseEntity.badRequest().body( null );
-		}
+		Board board = boardRepository.findById( DEFAULT_BOARD_ID ).orElseThrow();
 
 		Game newGame = Game.builder()
 				.board( board )

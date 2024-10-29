@@ -5,16 +5,20 @@ import java.util.concurrent.CompletableFuture;
 
 import org.springframework.stereotype.Service;
 
+import ch.pureguys.monopoly.api.dto.GameChatMessageDto;
 import ch.pureguys.monopoly.api.dto.GameDto;
 import ch.pureguys.monopoly.api.dto.GamePlayerDto;
 import ch.pureguys.monopoly.api.dto.GamePropertyDto;
 import ch.pureguys.monopoly.domain.entities.Game;
+import ch.pureguys.monopoly.domain.entities.GameChatMessage;
 import ch.pureguys.monopoly.domain.entities.GamePlayer;
 import ch.pureguys.monopoly.domain.entities.GameProperty;
 import ch.pureguys.monopoly.domain.entities.Property;
+import ch.pureguys.monopoly.mapper.impl.GameChatMessageMapper;
 import ch.pureguys.monopoly.mapper.impl.GameMapper;
 import ch.pureguys.monopoly.mapper.impl.GamePlayerMapper;
 import ch.pureguys.monopoly.mapper.impl.GamePropertyMapper;
+import ch.pureguys.monopoly.repository.impl.GameChatMessageRepository;
 import ch.pureguys.monopoly.repository.impl.GamePlayerRepository;
 import ch.pureguys.monopoly.repository.impl.GamePropertyRepository;
 import ch.pureguys.monopoly.repository.impl.GameRepository;
@@ -31,6 +35,7 @@ public class GameService
 	private final GamePlayerRepository gamePlayerRepository;
 	private final PropertyRepository propertyRepository;
 	private final GameRepository gameRepository;
+	private final GameChatMessageRepository gameChatMessageRepository;
 
 	public void prepareGameAsync ( long boardId, Game game )
 	{
@@ -56,7 +61,8 @@ public class GameService
 						.map( GamePlayerMapper.INSTANCE::gamePlayerToGamePlayerDto )
 						.toList();
 
-				GameDto gameDto = GameMapper.INSTANCE.gameToGameDto( game, gamePlayerDtos, gamePropertyDtos );
+				GameDto gameDto = GameMapper.INSTANCE.gameToGameDto( game, gamePlayerDtos, gamePropertyDtos,
+						List.of() );
 				log.info( "GameDto: {}", gameDto );
 
 				//Todo notify via websocket (json)
@@ -75,16 +81,11 @@ public class GameService
 
 	public GameDto getCurrentGameDto ( String roomId )
 	{
-		Game game = gameRepository.findByPublicRoomId( roomId );
-
-		if ( game == null )
-		{
-			log.error( "Game not found" );
-			throw new RuntimeException( "Game not found" );
-		}
+		Game game = gameRepository.findByPublicRoomId( roomId ).orElseThrow();
 
 		List<GamePlayer> gamePlayers = gamePlayerRepository.findAllByGameId( game.getGameId() );
 		List<GameProperty> gameProperties = gamePropertyRepository.findAllByGameId( game.getGameId() );
+		List<GameChatMessage> gameChatMessages = gameChatMessageRepository.findAllByGameId( game.getGameId() );
 
 		List<GamePlayerDto> gamePlayerDtos = gamePlayers.stream()
 				.map( GamePlayerMapper.INSTANCE::gamePlayerToGamePlayerDto )
@@ -94,7 +95,10 @@ public class GameService
 				.map( GamePropertyMapper.INSTANCE::gamePropertyToGamePropertyDto )
 				.toList();
 
-		return GameMapper.INSTANCE.gameToGameDto( game, gamePlayerDtos, gamePropertyDtos );
+		List<GameChatMessageDto> gameChatMessageDtos = gameChatMessages.stream()
+				.map( GameChatMessageMapper.INSTANCE::gameChatMessageToGameChatMessageDto )
+				.toList();
 
+		return GameMapper.INSTANCE.gameToGameDto( game, gamePlayerDtos, gamePropertyDtos, gameChatMessageDtos );
 	}
 }

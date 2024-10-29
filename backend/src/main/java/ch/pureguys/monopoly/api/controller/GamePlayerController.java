@@ -26,13 +26,7 @@ public class GamePlayerController
 	@PostMapping
 	public ResponseEntity<String> createUser ( @RequestParam String name, @RequestParam String roomId )
 	{
-		Game game = gameRepository.findByPublicRoomId( roomId );
-
-		if ( game == null )
-		{
-			log.error( "Game not found" );
-			return ResponseEntity.badRequest().body( "Game not found" );
-		}
+		Game game = gameRepository.findByPublicRoomId( roomId ).orElseThrow();
 
 		GamePlayer newPlayer = GamePlayer.builder()
 				.name( name )

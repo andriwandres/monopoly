@@ -6,6 +6,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
+import ch.pureguys.monopoly.api.dto.GameChatMessageDto;
 import ch.pureguys.monopoly.api.dto.GameDto;
 import ch.pureguys.monopoly.api.dto.GamePlayerDto;
 import ch.pureguys.monopoly.api.dto.GamePropertyDto;
@@ -21,6 +22,7 @@ public interface GameMapper
 
 	@Mapping( source = "players", target = "players" )
 	@Mapping( source = "properties", target = "properties" )
-	GameDto gameToGameDto ( Game game, List<GamePlayerDto> players, List<GamePropertyDto> properties );
+	@Mapping( source = "chatMessages", target = "chatMessages" )
+	GameDto gameToGameDto ( Game game, List<GamePlayerDto> players, List<GamePropertyDto> properties, List<GameChatMessageDto> chatMessages );
 
 }

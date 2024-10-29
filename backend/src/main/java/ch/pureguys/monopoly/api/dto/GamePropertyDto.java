@@ -2,7 +2,6 @@ package ch.pureguys.monopoly.api.dto;
 
 import ch.pureguys.monopoly.domain.FieldType;
 
-import ch.pureguys.monopoly.domain.entities.GamePlayer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

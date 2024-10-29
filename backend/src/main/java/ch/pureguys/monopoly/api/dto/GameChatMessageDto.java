@@ -1,8 +1,5 @@
 package ch.pureguys.monopoly.api.dto;
 
-import java.util.List;
-
-import ch.pureguys.monopoly.domain.GameStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,12 +13,11 @@ import lombok.ToString;
 @Setter
 @Builder
 @ToString
-public class GameDto
+public class GameChatMessageDto
 {
-	private String publicRoomId;
-	private GameStatus status;
-	private List<GamePlayerDto> players;
-	private List<GamePropertyDto> properties;
-	private List<GameChatMessageDto> chatMessages;
+	private Long gameChatMessageId;
+	private Long fromPlayerId;
+	private String fromPlayerName;
+	private String text;
 	private String createdAt;
 }

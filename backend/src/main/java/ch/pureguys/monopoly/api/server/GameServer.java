@@ -4,8 +4,12 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
+import ch.pureguys.monopoly.api.dto.GameChatMessageDto;
 import ch.pureguys.monopoly.domain.entities.Game;
 import ch.pureguys.monopoly.domain.entities.GamePlayer;
+import ch.pureguys.monopoly.mapper.impl.GameChatMessageMapper;
+import ch.pureguys.monopoly.mapper.impl.GamePlayerMapper;
+import ch.pureguys.monopoly.repository.impl.GameChatMessageRepository;
 import ch.pureguys.monopoly.repository.impl.GamePlayerRepository;
 import ch.pureguys.monopoly.repository.impl.GameRepository;
 import ch.pureguys.monopoly.service.impl.GameRoomService;
@@ -23,18 +27,13 @@ public class GameServer
 	private final GameRepository gameRepository;
 	private final GamePlayerRepository gamePlayerRepository;
 	private final GameService gameService;
+	private final GameChatMessageRepository gameChatMessageRepository;
 
 	@MessageMapping( "/join" ) // comes from frontend (/app/join)
 	//@SendTo( "/topic/game/{roomId}" ) // backend sends to frontend
 	public void join ( GameJoinMessage message )
 	{
-		Game game = gameRepository.findByPublicRoomId( message.roomId() );
-
-		if ( game == null )
-		{
-			log.error( "Game not found" );
-			return;
-		}
+		Game game = gameRepository.findByPublicRoomId( message.roomId() ).orElseThrow();
 
 		GamePlayer newPlayer = GamePlayer.builder()
 				.name( message.nickName() )
@@ -49,14 +48,40 @@ public class GameServer
 
 		gameRoomService.joinRoom( message.roomId(), created.getGamePlayerId() );
 
+		//websocket response for new joined player
+		String destination = String.format( "/topic/game/%s/%s", message.roomId(), created.getName() );
+		messagingTemplate.convertAndSend( destination, GamePlayerMapper.INSTANCE.gamePlayerToGamePlayerDto( created ) );
+
 		//websocket response for already joined players
-		String destination = String.format( "/topic/game/%s/event/payerJoined", message.roomId() );
+		destination = String.format( "/topic/game/%s/event/payerJoined", message.roomId() );
 		messagingTemplate.convertAndSend( destination, message );
 
-		//websocket response for new joined player
+		//send game to new joined player
 		destination = String.format( "/topic/game/%s", message.roomId() );
 		messagingTemplate.convertAndSend( destination, gameService.getCurrentGameDto( message.roomId() ) );
 	}
+
+	@MessageMapping( "/chat" ) // comes from frontend (/app/chat)
+	//@SendTo( "/topic/game/%s/event/messageSent" ) // backend sends to frontend
+	public void chat ( GameChatMessage message )
+	{
+		Game game = gameRepository.findByPublicRoomId( message.roomId() ).orElseThrow();
+		GamePlayer player = gamePlayerRepository.findById( message.playerId() ).orElseThrow();
+
+		ch.pureguys.monopoly.domain.entities.GameChatMessage gameChatMessage = ch.pureguys.monopoly.domain.entities.GameChatMessage.builder()
+				.game( game )
+				.from( player )
+				.text( message.message() )
+				.build();
+
+		ch.pureguys.monopoly.domain.entities.GameChatMessage saved = gameChatMessageRepository.save( gameChatMessage );
+
+		GameChatMessageDto gameChatMessageDto = GameChatMessageMapper.INSTANCE.gameChatMessageToGameChatMessageDto( saved );
+
+		String destination = String.format( "/topic/game/%s/event/messageSent", message.roomId() );
+		messagingTemplate.convertAndSend( destination, gameChatMessageDto );
+	}
+
 
 	@MessageMapping( "/throwDice" ) // comes from frontend (/app/throwDice)
 	//@SendTo( "/topic/game/{roomId}/event/diceThrown" ) // backend sends to frontend
@@ -70,6 +95,10 @@ public class GameServer
 	}
 
 	private record GameJoinMessage(String roomId, String nickName, String hexColor)
+	{
+	}
+
+	private record GameChatMessage(String roomId, Long playerId, String message)
 	{
 	}
 }
