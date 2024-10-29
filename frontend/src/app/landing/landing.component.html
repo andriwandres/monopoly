@@ -1,2 +1,2 @@
-<input class="nickname" type="text" placeholder="Nickname" [formControl]="nickname">
-<button type="button" class="submit" (click)="createRoom()">Create Room</button>
+<input class="nickname" type="text" placeholder="Nickname" [formControl]="nickname" (keyup.enter)="createOrJoinRoom()">
+<button type="button" class="submit" (click)="createOrJoinRoom()">{{ roomId ? "Join Room" : "Create Room" }}</button>

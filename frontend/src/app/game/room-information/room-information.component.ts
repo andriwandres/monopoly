@@ -1,11 +1,14 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
+import {ChatComponent} from './chat/chat.component';
 
 @Component({
   selector: 'app-room-information',
   standalone: true,
-  imports: [],
+  imports: [
+    ChatComponent
+  ],
   templateUrl: './room-information.component.html',
   styleUrl: './room-information.component.css'
 })

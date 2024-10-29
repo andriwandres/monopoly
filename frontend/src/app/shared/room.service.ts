@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConnectivityService } from './connectivity.service';
+import {Player} from './domain/player';
+import {Game} from './domain/game';
 
 const URL_PREFIX = 'http://localhost:8080/game';
 
@@ -21,7 +23,7 @@ export class RoomService {
       .subscribe(({ publicRoomId}) => this.joinRoom(publicRoomId, nickname));
   }
 
-  private joinRoom(roomId: string, nickname: string): void {
+  joinRoom(roomId: string, nickname: string): void {
     this.connectivityService.send('/app/join', {
       roomId,
       nickName: nickname,
@@ -29,10 +31,26 @@ export class RoomService {
     });
 
     // TODO remove eventually
-    this.connectivityService.on(`/topic/game/${roomId}`, m => {
+    this.connectivityService.on(`/topic/game/${roomId}`, (m: Game) => {
+      localStorage.setItem('game', JSON.stringify(m));
       console.log('game state', m);
+      this.router.navigate(['room', `${roomId}`]);
     });
 
-    this.router.navigate(['room', `${roomId}`]);
+    // Receive player information
+    this.connectivityService.on(`/topic/game/${roomId}/${nickname}`, m => {
+      localStorage.setItem('player', JSON.stringify(m));
+      console.log('player', m);
+    });
+  }
+
+  sendChatMessage(roomId: string, message: string): void {
+    const player: Player = JSON.parse(localStorage.getItem('player')!);
+
+    this.connectivityService.send(`/app/chat`, {
+      roomId,
+      playerId: player.gamePlayerId,
+      message
+    });
   }
 }
