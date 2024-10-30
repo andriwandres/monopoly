@@ -1,4 +1,5 @@
 ﻿using Monopoly.Presentation.Events.Dice;
+using Monopoly.Presentation.Events.Players;
 
 namespace Monopoly.Presentation.Hubs;
 
@@ -8,4 +9,6 @@ namespace Monopoly.Presentation.Hubs;
 public interface IGameClient
 {
     Task DiceThrown(DiceThrownEvent dice);
+    Task PlayerJoined(PlayerJoinedEvent player);
+    Task PlayerLeft(PlayerLeftEvent player);
 }
