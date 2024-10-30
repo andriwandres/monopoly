@@ -10,7 +10,7 @@ builder.Services
 
 var app = builder.Build();
 
-app.UsePresentationEndpoints();
+app.UsePresentationMiddleware(configuration);
 
 app.Run();
 

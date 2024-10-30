@@ -1,22 +1,11 @@
-import { Component, inject } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { GameService } from './shared/game.service';
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterOutlet],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent {
-  private readonly gameService = inject(GameService);
-
-  endTurn() {
-    this.gameService.endTurn();
-  }
-
-  throwDice() {
-    this.gameService.throwDice();
-  }
-}
+export class AppComponent {}

@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 import { BehaviorSubject, filter, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
-export class SocketService {
+export class GameServer {
   private readonly connectionSubject =
     new BehaviorSubject<HubConnection | null>(null);
 
   private readonly connection$ = this.connectionSubject
     .asObservable()
-    .pipe(filter(Boolean));
+    .pipe(filter(Boolean), takeUntilDestroyed());
 
   connect(gameCode: string, nickname: string, color: string): Promise<void> {
     const connection = new HubConnectionBuilder()
@@ -22,7 +23,7 @@ export class SocketService {
     return connection.start();
   }
 
-  on<M = void>(event: string): Observable<M> {
+  on<M = undefined>(event: string): Observable<M> {
     return new Observable<M>((observer) => {
       this.connection$.subscribe((connection) => {
         connection.on(event, (message: M | undefined) => {
