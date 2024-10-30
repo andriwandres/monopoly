@@ -11,4 +11,5 @@ public interface IGameClient
     Task DiceThrown(DiceThrownEvent dice);
     Task PlayerJoined(PlayerJoinedEvent player);
     Task PlayerLeft(PlayerLeftEvent player);
+    Task TurnEnded();
 }

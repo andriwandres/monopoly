@@ -37,7 +37,7 @@ internal sealed class GameHub : Hub<IGameClient>, IGameServer
         }
         
         await Groups.AddToGroupAsync(connection.ConnectionId, connection.GameCode);
-
+        
         await Clients
             .OthersInGroup(connection.GameCode)
             .PlayerJoined(new PlayerJoinedEvent(connection.Nickname, connection.ColorHex));
@@ -61,5 +61,14 @@ internal sealed class GameHub : Hub<IGameClient>, IGameServer
         await Clients
             .Group(connection.GameCode)
             .DiceThrown(new DiceThrownEvent(connection.Nickname, die1, die2));
+    }
+
+    public async Task EndTurn()
+    {
+        var connection = Context.ReadConnectionData();
+
+        await Clients
+            .Group(connection.GameCode)
+            .TurnEnded();
     }
 }

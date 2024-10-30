@@ -6,4 +6,5 @@
 internal interface IGameServer
 {
     Task ThrowDice();
+    Task EndTurn();
 }
