@@ -1,7 +1,9 @@
 :root {
     --color-black: #000;
     --color-white: #fefefe;
-    --color-purple: #29203f;
+
+    --color-blue-purple: #8c47e0;
+    --color-purple: #6647e0;
     --color-purple-dark: #130f1d;
 }
 
@@ -18,4 +20,5 @@ body {
 
 * {
     box-sizing: border-box;
+    font-family: "Lexend Deca", sans-serif;
 }

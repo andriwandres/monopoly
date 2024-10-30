@@ -1,0 +1,10 @@
+@import './theme';
+
+:host {
+    padding: 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: var(--input--background-color);
+    color: var(--input--color);
+    user-select: none;
+}

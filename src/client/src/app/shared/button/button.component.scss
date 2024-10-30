@@ -1,0 +1,19 @@
+@import './theme';
+
+:host {
+    padding: 1em 2em;
+    background-color: var(--button--background-color);
+    background-image: var(--button--background-gradient);
+    border: none;
+    border-radius: .75em;
+    user-select: none;
+    cursor: pointer;
+    color: var(--button--color);
+    transition: 200ms ease;
+
+    &:hover,
+    &:active,
+    &:focus {
+        opacity: 0.85;
+    }
+}

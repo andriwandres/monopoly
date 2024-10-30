@@ -1,1 +1,7 @@
-<p>landing works!</p>
+<h1 class="landing__heading">Monopoly</h1>
+
+<div class="landing__form">
+  <input monInput placeholder="Your nickname" [formControl]="nickname" />
+
+  <button monButton (click)="createGame()">Create Game</button>
+</div>

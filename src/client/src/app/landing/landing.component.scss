@@ -5,3 +5,16 @@
     justify-content: center;
     height: 100%;
 }
+
+.landing {
+    &__heading {
+        font-size: 4rem;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+}
