@@ -11,14 +11,23 @@ public static class Public
     public static IServiceCollection AddPresentationServices(this IServiceCollection services)
     {
         services.AddSignalR();
+        services.AddCors();
         return services;
     }
 
-    public static IEndpointRouteBuilder UsePresentationEndpoints(this IEndpointRouteBuilder routeBuilder)
+    public static WebApplication UsePresentationEndpoints(this WebApplication application)
     {
-        routeBuilder.MapHub<GameHub>("game-hub");
-        routeBuilder.MapGameEndpoints();
+        application.MapHub<GameHub>("game-hub");
+        application.MapGameEndpoints();
+
+        application.UseCors(configure =>
+        {
+            configure.AllowAnyMethod();
+            configure.AllowAnyHeader();
+            configure.AllowCredentials();
+            configure.WithOrigins("http://localhost:4200");
+        });
         
-        return routeBuilder;
+        return application;
     }
 }

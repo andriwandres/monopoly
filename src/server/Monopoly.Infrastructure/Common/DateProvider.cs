@@ -4,5 +4,5 @@ namespace Monopoly.Infrastructure.Common;
 
 public sealed class DateProvider : IDateProvider
 {
-    public DateTime Now() => DateTime.Now;
+    public DateTime Now() => DateTime.UtcNow;
 }
