@@ -1,13 +1,11 @@
-import { inject, Injectable } from '@angular/core';
-import { GameServer } from './game-server.service';
-import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class GameService {
-  private readonly socketService = inject(GameServer);
   private readonly httpClient = inject(HttpClient);
   private readonly router = inject(Router);
 

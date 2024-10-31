@@ -11,9 +11,12 @@
     color: var(--button--color);
     transition: 200ms ease;
 
-    &:hover,
-    &:active,
-    &:focus {
+    &:not(:disabled):is(:hover, :active, :focus) {
         opacity: 0.85;
+    }
+
+    &:disabled {
+        filter: grayscale(.6);
+        cursor: default;
     }
 }

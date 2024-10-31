@@ -1,0 +1,10 @@
+@for (color of colors; track color) {
+  <button
+    type="button"
+    class="color"
+    [style.backgroundColor]="color"
+    [class.selected]="color === selectedColor"
+    (click)="selectColor(color)"
+    [attr.aria-label]="color"
+  ></button>
+}

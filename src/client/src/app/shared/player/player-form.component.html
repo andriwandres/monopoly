@@ -1,0 +1,9 @@
+<form class="player__form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <mon-color-picker formControlName="colorHex" />
+
+  <input monInput placeholder="Your nickname" formControlName="nickname" />
+
+  <button type="submit" monButton [disabled]="form.invalid">
+    {{ submitText() }}
+  </button>
+</form>

@@ -1,0 +1,18 @@
+:host {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+
+    .color {
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        border: none;
+        cursor: pointer;
+        transition: 200ms ease-in-out;
+
+        &.selected {
+            transform: scale(1.2);
+        }
+    }
+}
